@@ -1,0 +1,342 @@
+@import url("https://fonts.googleapis.com/css?family=Acme|Lobster|Patua+One|Rubik|Sniglet|Quicksand|Barlow");
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+    width: 100%;
+}
+
+
+main {
+    font-family: Barlow, Quicksand, Rubik, sans-serif, serif, 'Times New Roman', Times, serif !important;
+}
+
+footer {
+    font-family: Rubik, sans-serif, serif, 'Times New Roman', Times, serif;
+}
+
+.example::-webkit-scrollbar {
+    display: none;
+}
+
+.navbar {
+    background-color: rgb(0, 0, 0) !important;
+    /* background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%) !important; */
+}
+
+.card {
+    box-shadow: 15px 15px 10px rgb(78, 77, 77);
+
+}
+
+
+.card-header:hover {
+    background: rgb(11, 22, 83) !important;
+    color: whitesmoke !important;
+    transition: 0.1s ease-in;
+}
+
+a {
+    text-decoration: none !important;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.custom-header:hover {
+    background: rgb(143, 189, 186) !important;
+}
+
+.card-header {
+    color: black !important;
+    background: rgb(152, 214, 230) !important;
+    transition: 0.3s ease-in;
+
+}
+
+.nav-link:hover {
+    background: black !important;
+    color: white !important;
+    transition: 0.7s ease;
+}
+
+.icon-bar {
+    color: black;
+}
+
+
+
+
+.card h4 {
+    margin: 40px 40px 0 40px;
+    text-align: left;
+}
+
+.card h6 {
+    margin: 25px 40px 0 40px;
+    text-align: left;
+}
+
+.card p {
+    text-align: right;
+    margin-right: 50px;
+    line-height: 10px;
+}
+
+
+.button {
+    display: inline-block;
+    font-family: "Montserrat", "Trebuchet MS", Helvetica, sans-serif;
+
+    padding: .8em 1.4em;
+    padding-right: 4.7em;
+    background: #009ED8;
+    border: none;
+    color: white;
+}
+
+.card img {
+    height: 210px;
+}
+
+/* .card:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+    transition: 0.5s ease;
+} */
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.5));
+    /*background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)*/
+    overflow-x: hidden;
+    background-repeat: no-repeat;
+}
+
+
+
+.card-header {
+    background-color: rgb(133, 204, 231);
+}
+
+
+
+.myimage {
+    opacity: 1;
+    display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.card-img-top:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+    transition: 0.2s ease;
+
+}
+
+.col-md-3 .card {
+    width: 100%;
+    height: 100%;
+
+}
+
+.btn:hover {
+    background: black;
+    color: white;
+    border: 0.5px solid white;
+}
+
+.fa:hover {
+    color: red;
+
+}
+
+.fa {
+    color: black;
+}
+
+.profa {
+    color: black;
+}
+
+
+footer .container-fluid {
+    padding: 10vmin 10vmin;
+}
+
+footer .column a+a {
+    padding: 0 0.7em;
+}
+
+
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+/* 
+.content-section a:hover {
+    background: red;
+} */
+
+.account-img {
+    height: 125px !important;
+    width: 125px !important;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.account-heading {
+    font-size: 2.5rem;
+}
+
+
+/* ===== MOBILE FIXES FOR CARDS AND CHAT ICON ===== */
+
+/* Fix card text display on mobile */
+@media (max-width: 768px) {
+    .card-body {
+        min-height: auto !important;
+        padding: 12px !important;
+    }
+    
+    .card-text {
+        word-wrap: break-word !important;
+        overflow: visible !important;
+        white-space: normal !important;
+        display: block !important;
+        max-height: none !important;
+        -webkit-line-clamp: unset !important;
+    }
+    
+    /* Ensure all text is visible */
+    .card p, 
+    .card .card-text {
+        overflow: visible !important;
+        text-overflow: unset !important;
+        white-space: normal !important;
+        height: auto !important;
+    }
+}
+
+/* Fix chat icon positioning */
+.chat-icon-wrapper {
+    position: relative;
+}
+
+/* Ensure cards have proper spacing on mobile */
+@media (max-width: 576px) {
+    .row.g-4 {
+        margin-left: -8px;
+        margin-right: -8px;
+    }
+    
+    .col-sm-6 {
+        padding-left: 8px;
+        padding-right: 8px;
+        margin-bottom: 16px;
+    }
+    
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+}
+
+/* Fix text alignment in cards */
+.card .card-text {
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+/* Ensure welcome text and chat icon are aligned */
+.row.align-items-center {
+    align-items: center !important;
+}
+
+/* Mobile header alignment */
+@media (max-width: 768px) {
+    .row.align-items-center {
+        margin: 0 -5px;
+    }
+    
+    .col-8, .col-4 {
+        padding: 0 5px;
+    }
+}
+
+/* ===== PERFECT CARD TYPOGRAPHY FIXES ===== */
+
+/* Remove all text truncation */
+.card * {
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+}
+
+/* Perfect paragraph display */
+.card p,
+.card-description,
+.card-text {
+    display: block !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    word-wrap: break-word !important;
+    height: auto !important;
+    max-height: none !important;
+    line-height: 1.6 !important;
+}
+
+/* Perfect heading display */
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6,
+.card-title {
+    display: block !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.75rem !important;
+}
+
+/* Ensure proper spacing between heading and paragraph */
+.card-body > * + * {
+    margin-top: 0.5rem !important;
+}
+
+/* Mobile typography perfection */
+@media (max-width: 768px) {
+    .card p,
+    .card-description {
+        font-size: 0.875rem !important;
+        line-height: 1.5 !important;
+    }
+    
+    .card-title {
+        font-size: 1.1rem !important;
+        line-height: 1.3 !important;
+    }
+}

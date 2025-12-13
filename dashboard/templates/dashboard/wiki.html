@@ -1,0 +1,17 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<section class='text-center container'>
+    <h2>Search Anything in wikipedia</h2>
+    <p>just enter the search query to obtain the results</p><b>Enter the your Query</b>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button href="" class="btn btn-outline-info" type="submit" value="Submit">
+            Search
+        </button>
+    </form><br>
+</section>
+
+{% endblock content %}

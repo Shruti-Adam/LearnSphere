@@ -1,0 +1,17 @@
+{% extends 'dashboard/base.html' %} 
+{% load static %} 
+{% block content %}
+<section class='text-center container'>
+    <h2>Search Videos in Youtube</h2>
+    <p>search videos and select any video to open in youtube</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button href="" class="btn btn-outline-info" type="submit" value="Submit">
+            Search
+        </button>
+    </form><br>
+</section>
+
+{% endblock content %}

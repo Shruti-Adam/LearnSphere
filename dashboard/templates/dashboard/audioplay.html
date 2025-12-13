@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audio Playback</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <h2>Audio File</h2>
+    <audio id="audioPlayer" controls>
+        <source src="{{ audio_file }}?v={{ timestamp }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <h2>Pdf Extracted Text</h2>
+    <div id="textContainer">
+        {% for line in extracted_lines %}
+            <p class="text-line">{{ line }}</p>  <!-- ✅ Removed extra period -->
+        {% endfor %}
+    </div>
+    
+    <script>
+        let audioPlayer = document.getElementById("audioPlayer");
+        let textLines = document.querySelectorAll(".text-line");
+        let durations = JSON.parse('{{ durations|safe }}');  // Convert passed durations to JavaScript array
+        let index = 0;
+        let currentTime = 0;
+    
+        function highlightText() {
+            if (index < textLines.length) {
+                textLines.forEach(line => line.classList.remove("highlight"));
+                textLines[index].classList.add("highlight");
+    
+                // ✅ Wait for the estimated duration before highlighting the next sentence
+                setTimeout(() => {
+                    index++;
+                    highlightText();
+                }, durations[index] * 1000);  // Convert seconds to milliseconds
+            }
+        }
+    
+        audioPlayer.addEventListener("play", function() {
+            index = 0;
+            highlightText();
+        });
+    
+        audioPlayer.addEventListener("pause", function() {
+            clearTimeout(); // Stop highlight animation when paused
+        });
+    </script>
+</body>
+</html>    
