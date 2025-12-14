@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-n-9_zpj%o5@f$$n_ztvzp722un^xde@yidru=f5a-cx7uz(woa
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+# Allow only specific hosts
+ALLOWED_HOSTS = [
+    "learnsphere-xr1n.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
+
 
 
 import os
@@ -147,6 +153,8 @@ STATIC_URL = "/static/"
 
 # Add this line to define where static files should be collected
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+
 
 # Ensure STATICFILES_DIRS is correctly set
 STATICFILES_DIRS = [
