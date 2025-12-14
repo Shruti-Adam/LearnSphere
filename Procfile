@@ -1,1 +1,1 @@
-web: gunicorn Learnsphere.wsgi:application
+gunicorn Learnsphere.wsgi:application
