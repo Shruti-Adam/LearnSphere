@@ -22,9 +22,8 @@ import threading
 from gtts import gTTS
 import json
 import pdfplumber
-import pytesseract
-from pdf2image import convert_from_path
-import pyttsx3
+
+from gtts import gTTS
 from .models import TexttoAudio
 from django.core.files.storage import FileSystemStorage
 from .forms import TextForm
