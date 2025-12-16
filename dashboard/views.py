@@ -3,10 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.http import JsonResponse
-from django.utils.timezone import localtime, now
+from django.utils.timezone import localtime
 from django.views import generic
+from django.views.decorators.http import require_POST
 from collections import defaultdict
-import os, time, asyncio
+import os, time
 
 from .forms import (
     NotesForm, HomeworkForm, TodoForm, DashboardForm,
@@ -14,8 +15,11 @@ from .forms import (
     MathConversionForm, UnitConversionForm,
     UserUpdateForm, ProfileUpdateForm
 )
-from .models import Notes, Homework, Todo, ChatMessage, TexttoAudio, Profile
 
+from .models import (
+    Notes, Homework, Todo,
+    ChatMessage, TexttoAudio, Profile
+)
 
 # ================= HOME =================
 def home(request):
@@ -29,18 +33,19 @@ def chat_page(request):
 
 
 @login_required
+@require_POST
 def send_message(request):
-    if request.method == 'POST':
-        msg = ChatMessage.objects.create(
-            sender=request.user,
-            message=request.POST.get('message')
-        )
-        return JsonResponse({
-            'id': msg.id,
-            'message': msg.message,
-            'sender': msg.sender.username,
-            'time': localtime(msg.timestamp).strftime('%I:%M %p')
-        })
+    msg = ChatMessage.objects.create(
+        sender=request.user,
+        message=request.POST.get('message')
+    )
+    return JsonResponse({
+        'id': msg.id,
+        'sender': msg.sender.username,
+        'message': msg.message,
+        'timestamp': msg.timestamp.isoformat(),
+        'is_owner': True
+    })
 
 
 @login_required
@@ -54,11 +59,26 @@ def get_messages(request):
             'id': m.id,
             'sender': m.sender.username,
             'message': m.message,
-            'time': localtime(m.timestamp).strftime('%I:%M %p'),
+            'timestamp': m.timestamp.isoformat(),
             'is_owner': m.sender == request.user
         })
 
-    return JsonResponse({'messages': grouped})
+    return JsonResponse({'grouped_messages': grouped})
+
+
+@login_required
+@require_POST
+def delete_message(request, message_id):
+    message = get_object_or_404(ChatMessage, id=message_id)
+
+    if message.sender != request.user:
+        return JsonResponse(
+            {'status': 'error', 'message': 'Permission denied'},
+            status=403
+        )
+
+    message.delete()
+    return JsonResponse({'status': 'success'})
 
 
 # ================= NOTES =================
@@ -138,7 +158,7 @@ def books(request):
         data = requests.get(url).json()
 
         results = []
-        for i in range(5):
+        for i in range(min(5, len(data.get('items', [])))):
             info = data['items'][i]['volumeInfo']
             results.append({
                 'title': info.get('title'),
@@ -159,9 +179,12 @@ def listen(request):
     from django.conf import settings
 
     if request.method == "POST" and request.FILES.get("pdf_file"):
-        obj = TexttoAudio.objects.create(pdf=request.FILES['pdf_file'])
-        text = ""
+        obj = TexttoAudio.objects.create(
+            user=request.user,
+            pdf=request.FILES['pdf_file']
+        )
 
+        text = ""
         with pdfplumber.open(obj.pdf.path) as pdf:
             for page in pdf.pages:
                 if page.extract_text():
@@ -169,7 +192,6 @@ def listen(request):
 
         filename = f"audio_{int(time.time())}.mp3"
         audio_path = os.path.join(settings.MEDIA_ROOT, filename)
-
         gTTS(text).save(audio_path)
 
         return render(request, 'dashboard/audioplay.html', {
@@ -190,9 +212,9 @@ def wiki(request):
 # ================= LANGUAGE TRANSLATION =================
 def language_translation(request):
     result = ""
-    if request.method == "POST":
-        from googletrans import Translator
+    from googletrans import Translator
 
+    if request.method == "POST":
         form = LanguageTranslationForm(request.POST)
         if form.is_valid():
             translator = Translator()
@@ -212,14 +234,13 @@ def language_translation(request):
 
 # ================= MATH & UNIT =================
 def math_conversion(request):
-    from sympy import symbols, Eq, solve, simplify
-
+    from sympy import simplify
     result = ""
+
     if request.method == "POST":
         form = MathConversionForm(request.POST)
         if form.is_valid():
-            val = form.cleaned_data['input_value']
-            result = simplify(val)
+            result = simplify(form.cleaned_data['input_value'])
 
     return render(request, "dashboard/math_conversion.html", {
         "form": MathConversionForm(),
@@ -229,6 +250,7 @@ def math_conversion(request):
 
 def unit_conversion(request):
     result = ""
+
     if request.method == "POST":
         form = UnitConversionForm(request.POST)
         if form.is_valid():
@@ -247,7 +269,11 @@ def profile(request):
 
     if request.method == "POST":
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        p_form = ProfileUpdateForm(
+            request.POST,
+            request.FILES,
+            instance=request.user.profile
+        )
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -283,22 +309,4 @@ def user_login(request):
             return redirect("home")
         messages.error(request, "Invalid credentials")
 
-    return render(request, "login.html")
-
-from django.views.decorators.http import require_POST
-
-@login_required
-@require_POST
-def delete_message(request, message_id):
-    message = get_object_or_404(ChatMessage, id=message_id)
-
-    # Allow only the sender to delete their own message
-    if message.sender != request.user:
-        return JsonResponse(
-            {'error': 'Permission denied'},
-            status=403
-        )
-
-    message.delete()
-    return JsonResponse({'status': 'deleted'})
-
+    return render(request, "dashboard/login.html")
