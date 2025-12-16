@@ -284,3 +284,21 @@ def user_login(request):
         messages.error(request, "Invalid credentials")
 
     return render(request, "login.html")
+
+from django.views.decorators.http import require_POST
+
+@login_required
+@require_POST
+def delete_message(request, message_id):
+    message = get_object_or_404(ChatMessage, id=message_id)
+
+    # Allow only the sender to delete their own message
+    if message.sender != request.user:
+        return JsonResponse(
+            {'error': 'Permission denied'},
+            status=403
+        )
+
+    message.delete()
+    return JsonResponse({'status': 'deleted'})
+
