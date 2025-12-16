@@ -7,14 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>LearnSphere</title>
-  
+
   <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
-  
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous"
+  />
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 </head>
@@ -24,72 +31,119 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}">LearnSphere</a>
-        
-        <!-- Fixed: Bootstrap 5 toggle button -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <!-- Bootstrap 5 toggle -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
-        
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarSupportedContent"
+        >
           <ul class="navbar-nav mb-2 mb-lg-0">
+
+            <!-- Home -->
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+              <a class="nav-link active" href="{% url 'home' %}">Home</a>
             </li>
+
+            <!-- Profile -->
             <li class="nav-item">
               <a class="nav-link" href="{% url 'profile' %}">Profile</a>
             </li>
-            
+
+            <!-- Sections Dropdown -->
             <li class="nav-item dropdown">
-              <!-- Fixed: data-bs-toggle instead of data-toggle -->
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 Sections
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                <!-- Study -->
                 <a class="dropdown-item" href="{% url 'books' %}">Books</a>
                 <a class="dropdown-item" href="{% url 'wiki' %}">Wikipedia</a>
+
                 <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item" href="{% url 'listen' %}">AudioBook</a>
-                <a class="dropdown-item" href="{% url 'youtube' %}">Youtube</a>
+                <!-- Media -->
+                <a class="dropdown-item" href="{% url 'listen' %}">Audio Book</a>
+                <a class="dropdown-item" href="{% url 'youtube' %}">YouTube</a>
+
                 <div class="dropdown-divider"></div>
+
+                <!-- Tasks -->
                 <a class="dropdown-item" href="{% url 'todo' %}">To-do</a>
                 <a class="dropdown-item" href="{% url 'homework' %}">Homework</a>
+
                 <div class="dropdown-divider"></div>
+
+                <!-- Notes -->
                 <a class="dropdown-item" href="{% url 'notes' %}">Notes</a>
-                <a class="dropdown-item" href="{% url 'conversion' %}">Conversion</a>
+
                 <div class="dropdown-divider"></div>
+
+                <!-- Conversions (DIRECT LINKS – SAFE) -->
+                <a class="dropdown-item" href="{% url 'language_translation' %}">
+                  Language Translation
+                </a>
+                <a class="dropdown-item" href="{% url 'math_conversion' %}">
+                  Math Conversion
+                </a>
+                <a class="dropdown-item" href="{% url 'unit_conversion' %}">
+                  Unit Conversion
+                </a>
+
               </div>
             </li>
-            
+
+            <!-- Group Chat -->
             <li class="nav-item">
               <a class="nav-link" href="{% url 'chat_page' %}">Group Chat</a>
             </li>
-            
+
+            <!-- Auth -->
             {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
             {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'register' %}">Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">Login</a>
-            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
             {% endif %}
+
           </ul>
         </div>
       </div>
     </nav>
   </header>
-  
+
   <br /><br />
-  <main>
+
+  <main class="container">
     {% if messages %}
       {% for msg in messages %}
-        <div class="alert alert-{{msg.tags}}">{{msg}}</div>
+        <div class="alert alert-{{ msg.tags }}">{{ msg }}</div>
       {% endfor %}
     {% endif %}
 
@@ -97,7 +151,7 @@
     {% endblock content %}
   </main>
 
-  <!-- Bootstrap 5 Bundle with Popper (replaces all old scripts) -->
+  <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
