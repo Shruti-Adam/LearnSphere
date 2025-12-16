@@ -1,16 +1,12 @@
-{% extends 'dashboard/base.html' %} 
-{% load static %} 
+{% extends 'dashboard/base.html' %}
+{% load static %}
 {% block content %}
 
 <section class="container-fluid px-3 px-md-4 py-4">
-  <!-- Header with Welcome and Chat Icon -->
   <div class="row align-items-center mb-4">
     <div class="col-7 col-md-8">
-      <h1 class="h2 fw-bold mb-0">
-        Welcome
-      </h1>
+      <h1 class="h2 fw-bold mb-0">Welcome</h1>
     </div>
-    
     <div class="col-5 col-md-4 text-end">
       <a href="{% url 'chat_page' %}" class="text-decoration-none">
         <div class="d-inline-flex align-items-center">
@@ -22,324 +18,123 @@
       </a>
     </div>
   </div>
-  
+
   <hr class="my-4">
-  
-  <!-- Cards Grid -->
+
   <div class="row g-4">
-    <!-- Notes Card -->
+
+    {% comment %} CARD TEMPLATE {% endcomment %}
+
+    {% for card in "" %}
+    {% endfor %}
+
+    <!-- NOTES -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 border-0 shadow-sm hover-card">
         <a href="{% url 'notes' %}" class="text-decoration-none text-dark">
-          <div class="card-img-top-container">
-            <img src="{% static 'images/notes.jpg' %}" class="card-img-top" alt="Notes">
-            <div class="card-icon">
-              <i class="fas fa-sticky-note"></i>
-            </div>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title fw-bold mb-3">Notes</h5>
-            <div class="card-content">
-              <!-- INLINE STYLE FIX -->
-              <p style="
-                color: #4a5568;
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin: 0;
-                text-align: left;
-                padding-top: 0.5rem;
-                overflow: visible !important;
-                text-overflow: unset !important;
-                white-space: normal !important;
-                word-wrap: break-word !important;
-                word-break: normal !important;
-                display: block !important;
-                height: auto !important;
-                max-height: none !important;
-                min-height: auto !important;
-              ">
-                Create and organize your notes. Store them permanently and access anytime from any device.
-              </p>
-            </div>
+          <img src="{% static 'images/notes.jpg' %}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Notes</h5>
+            <p>Create and organize your notes.</p>
           </div>
         </a>
       </div>
     </div>
 
-    <!-- Homework Card -->
+    <!-- HOMEWORK -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 border-0 shadow-sm hover-card">
         <a href="{% url 'homework' %}" class="text-decoration-none text-dark">
-          <div class="card-img-top-container">
-            <img src="{% static 'images/homework.jpg' %}" class="card-img-top" alt="Homework">
-            <div class="card-icon">
-              <i class="fas fa-file-alt"></i>
-            </div>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title fw-bold mb-3">Homework</h5>
-            <div class="card-content">
-              <!-- INLINE STYLE FIX -->
-              <p style="
-                color: #4a5568;
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin: 0;
-                text-align: left;
-                padding-top: 0.5rem;
-                overflow: visible !important;
-                text-overflow: unset !important;
-                white-space: normal !important;
-                word-wrap: break-word !important;
-                word-break: normal !important;
-                display: block !important;
-                height: auto !important;
-                max-height: none !important;
-                min-height: auto !important;
-              ">
-                Add homework assignments with deadlines. Get reminders and track your progress easily.
-              </p>
-            </div>
+          <img src="{% static 'images/homework.jpg' %}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Homework</h5>
+            <p>Track assignments and deadlines.</p>
           </div>
         </a>
       </div>
     </div>
 
-    <!-- YouTube Card -->
+    <!-- YOUTUBE -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 border-0 shadow-sm hover-card">
         <a href="{% url 'youtube' %}" class="text-decoration-none text-dark">
-          <div class="card-img-top-container">
-            <img src="{% static 'images/youtube.jpg' %}" class="card-img-top" alt="YouTube">
-            <div class="card-icon">
-              <i class="fab fa-youtube"></i>
-            </div>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title fw-bold mb-3">YouTube</h5>
-            <div class="card-content">
-              <!-- INLINE STYLE FIX -->
-              <p style="
-                color: #4a5568;
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin: 0;
-                text-align: left;
-                padding-top: 0.5rem;
-                overflow: visible !important;
-                text-overflow: unset !important;
-                white-space: normal !important;
-                word-wrap: break-word !important;
-                word-break: normal !important;
-                display: block !important;
-                height: auto !important;
-                max-height: none !important;
-                min-height: auto !important;
-              ">
-                Search educational videos and tutorials. Create playlists for different subjects and courses.
-              </p>
-            </div>
+          <img src="{% static 'images/youtube.jpg' %}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">YouTube</h5>
+            <p>Educational videos and tutorials.</p>
           </div>
         </a>
       </div>
     </div>
 
-    <!-- To Do Card -->
+    <!-- TODO -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 border-0 shadow-sm hover-card">
         <a href="{% url 'todo' %}" class="text-decoration-none text-dark">
-          <div class="card-img-top-container">
-            <img src="{% static 'images/todo.jpg' %}" class="card-img-top" alt="To Do">
-            <div class="card-icon">
-              <i class="fas fa-tasks"></i>
-            </div>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title fw-bold mb-3">To Do</h5>
-            <div class="card-content">
-              <!-- INLINE STYLE FIX -->
-              <p style="
-                color: #4a5568;
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin: 0;
-                text-align: left;
-                padding-top: 0.5rem;
-                overflow: visible !important;
-                text-overflow: unset !important;
-                white-space: normal !important;
-                word-wrap: break-word !important;
-                word-break: normal !important;
-                display: block !important;
-                height: auto !important;
-                max-height: none !important;
-                min-height: auto !important;
-              ">
-                Manage your daily tasks. Set priorities and mark tasks as complete when finished.
-              </p>
-            </div>
+          <img src="{% static 'images/todo.jpg' %}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">To-Do</h5>
+            <p>Manage daily tasks.</p>
           </div>
         </a>
       </div>
     </div>
 
-    <!-- Books Card -->
+    <!-- BOOKS -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 border-0 shadow-sm hover-card">
         <a href="{% url 'books' %}" class="text-decoration-none text-dark">
-          <div class="card-img-top-container">
-            <img src="{% static 'images/books.jpg' %}" class="card-img-top" alt="Books">
-            <div class="card-icon">
-              <i class="fas fa-book"></i>
-            </div>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title fw-bold mb-3">Books</h5>
-            <div class="card-content">
-              <!-- INLINE STYLE FIX -->
-              <p style="
-                color: #4a5568;
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin: 0;
-                text-align: left;
-                padding-top: 0.5rem;
-                overflow: visible !important;
-                text-overflow: unset !important;
-                white-space: normal !important;
-                word-wrap: break-word !important;
-                word-break: normal !important;
-                display: block !important;
-                height: auto !important;
-                max-height: none !important;
-                min-height: auto !important;
-              ">
-                Browse digital books and textbooks. Organized by subjects, authors, and difficulty levels.
-              </p>
-            </div>
+          <img src="{% static 'images/books.jpg' %}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Books</h5>
+            <p>Academic and reference books.</p>
           </div>
         </a>
       </div>
     </div>
 
-    <!-- Audio Book Card -->
+    <!-- AUDIO -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 border-0 shadow-sm hover-card">
         <a href="{% url 'listen' %}" class="text-decoration-none text-dark">
-          <div class="card-img-top-container">
-            <img src="{% static 'images/audiobook.jpg' %}" class="card-img-top" alt="Audio Book">
-            <div class="card-icon">
-              <i class="fas fa-headphones"></i>
-            </div>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title fw-bold mb-3">Audio Book</h5>
-            <div class="card-content">
-              <!-- INLINE STYLE FIX -->
-              <p style="
-                color: #4a5568;
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin: 0;
-                text-align: left;
-                padding-top: 0.5rem;
-                overflow: visible !important;
-                text-overflow: unset !important;
-                white-space: normal !important;
-                word-wrap: break-word !important;
-                word-break: normal !important;
-                display: block !important;
-                height: auto !important;
-                max-height: none !important;
-                min-height: auto !important;
-              ">
-                Convert text to audio. Listen to study materials, books, and documents on the go.
-              </p>
-            </div>
+          <img src="{% static 'images/audiobook.jpg' %}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Audio Book</h5>
+            <p>Convert PDFs to audio.</p>
           </div>
         </a>
       </div>
     </div>
 
-    <!-- Wikipedia Card -->
+    <!-- WIKI -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 border-0 shadow-sm hover-card">
         <a href="{% url 'wiki' %}" class="text-decoration-none text-dark">
-          <div class="card-img-top-container">
-            <img src="{% static 'images/wiki.jpg' %}" class="card-img-top" alt="Wikipedia">
-            <div class="card-icon">
-              <i class="fab fa-wikipedia-w"></i>
-            </div>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title fw-bold mb-3">Wikipedia</h5>
-            <div class="card-content">
-              <!-- INLINE STYLE FIX -->
-              <p style="
-                color: #4a5568;
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin: 0;
-                text-align: left;
-                padding-top: 0.5rem;
-                overflow: visible !important;
-                text-overflow: unset !important;
-                white-space: normal !important;
-                word-wrap: break-word !important;
-                word-break: normal !important;
-                display: block !important;
-                height: auto !important;
-                max-height: none !important;
-                min-height: auto !important;
-              ">
-                Quick access to Wikipedia for research. Get accurate information for assignments and projects.
-              </p>
-            </div>
+          <img src="{% static 'images/wiki.jpg' %}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Wikipedia</h5>
+            <p>Quick research access.</p>
           </div>
         </a>
       </div>
     </div>
 
-    <!-- Conversion Card -->
+    <!-- CONVERSION (FIXED) -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 border-0 shadow-sm hover-card">
-        <a href="{% url 'conversion' %}" class="text-decoration-none text-dark">
-          <div class="card-img-top-container">
-            <img src="{% static 'images/conversion.jpg' %}" class="card-img-top" alt="Conversion">
-            <div class="card-icon">
-              <i class="fas fa-exchange-alt"></i>
-            </div>
-          </div>
-          <div class="card-body d-flex flex-column">
-            <h5 class="card-title fw-bold mb-3">Conversion</h5>
-            <div class="card-content">
-              <!-- INLINE STYLE FIX -->
-              <p style="
-                color: #4a5568;
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin: 0;
-                text-align: left;
-                padding-top: 0.5rem;
-                overflow: visible !important;
-                text-overflow: unset !important;
-                white-space: normal !important;
-                word-wrap: break-word !important;
-                word-break: normal !important;
-                display: block !important;
-                height: auto !important;
-                max-height: none !important;
-                min-height: auto !important;
-              ">
-                Convert between different units. Useful for math, science, engineering, and daily calculations.
-              </p>
-            </div>
+        <a href="{% url 'language_translation' %}" class="text-decoration-none text-dark">
+          <img src="{% static 'images/conversion.jpg' %}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Conversion</h5>
+            <p>Language, math & unit conversions.</p>
           </div>
         </a>
       </div>
     </div>
+
   </div>
 </section>
+
 
 <style>
   /* Card Container */
